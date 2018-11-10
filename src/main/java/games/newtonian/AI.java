@@ -41,7 +41,7 @@ public class AI extends BaseAI {
      */
     public String getName() {
         // <<-- Creer-Merge: get-name -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
-        return "Newtonian Java Player"; // REPLACE THIS WITH YOUR TEAM NAME!
+        return "Rusty Bike"; // REPLACE THIS WITH YOUR TEAM NAME!
         // <<-- /Creer-Merge: get-name -->>
     }
 
@@ -86,6 +86,15 @@ public class AI extends BaseAI {
     public boolean runTurn() {
         // <<-- Creer-Merge: runTurn -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
         // Put your game logic here for runTurn
+
+        // 1. sync the game data with the list of units
+        for(Unit unit : this.player.units) {
+
+        }
+
+
+        // Update the state machine for the game strategy
+
         return true;
         // <<-- /Creer-Merge: runTurn -->>
     }
