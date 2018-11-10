@@ -3,7 +3,7 @@ package com.bike.rusty.ai.fuzzylogic;
 public class FuzzyMembership {
     private FuzzyMembership() {}
 
-    public float triangle(float value, float lowerLimit, float upperLimit, float middle) {
+    public static float triangle(float value, float lowerLimit, float upperLimit, float middle) {
         if(value <= lowerLimit) return 0f;
 
         if((lowerLimit < value) && (value <= middle)) {
@@ -21,7 +21,7 @@ public class FuzzyMembership {
         return 0f;
     }
 
-    public float left(float value, float upperLimit, float upperSupportLimit) {
+    public static float left(float value, float upperLimit, float upperSupportLimit) {
         if(value > upperLimit) return 0.0f;
 
         if((upperSupportLimit <= value) && (value <=upperLimit)) {
@@ -35,7 +35,7 @@ public class FuzzyMembership {
         return 0.0f;
     }
 
-    public float right(float value, float lowerLimit, float lowerSupportLimit) {
+    public static float right(float value, float lowerLimit, float lowerSupportLimit) {
         if(value < lowerLimit) return 0.0f;
         if((lowerLimit<=value)&& (value<= lowerSupportLimit)) return (value-lowerLimit)/(lowerSupportLimit-lowerLimit);
         if(value>lowerSupportLimit) return 1.0f;
@@ -43,7 +43,7 @@ public class FuzzyMembership {
         return 0.0f;
     }
 
-    public FuzzyVariable grade(float value, float low, float high) {
+    public static FuzzyVariable grade(float value, float low, float high) {
 
 
         float middle = (high - low) / 2.0f;
