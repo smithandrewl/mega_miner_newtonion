@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  * This is where you build your AI for the Newtonian game.
  */
 public class AI extends BaseAI {
-
+    public static Level LOG_LEVEL = Level.ALL;
     private static Logger LOGGER = Logger.getLogger(AI.class.getName());
     /**
      * This is the Game object itself, it contains all the information about the current game
@@ -103,8 +103,7 @@ public class AI extends BaseAI {
             this.gameStrategy = new StateMachine<>(new InitialGameStrategy());
             this.hasStarted   = true;
 
-            this.LOGGER.setLevel(Level.ALL);
-            this.LOGGER.addHandler(new ConsoleHandler());
+            this.LOGGER.setLevel(LOG_LEVEL);
         }
 
         this.LOGGER.log(Level.FINE, "In run turn");
