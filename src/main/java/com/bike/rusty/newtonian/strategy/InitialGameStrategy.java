@@ -19,6 +19,7 @@ public class InitialGameStrategy implements State<GameData> {
 
     @Override
     public State<GameData> update(GameData data) {
+        LOGGER.info("Initial Game Strategy is updating");
         return null;
     }
 
