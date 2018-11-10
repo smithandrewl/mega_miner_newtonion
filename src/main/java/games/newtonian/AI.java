@@ -5,12 +5,19 @@ package games.newtonian;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Random;
+
+import com.bike.rusty.ai.StateMachine;
+import com.bike.rusty.newtonian.GameData;
+import com.bike.rusty.newtonian.strategy.InitialGameStrategy;
 import joueur.BaseAI;
+
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 // <<-- Creer-Merge: imports -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
 // you can add additional import(s) here
@@ -20,6 +27,8 @@ import joueur.BaseAI;
  * This is where you build your AI for the Newtonian game.
  */
 public class AI extends BaseAI {
+
+    private static Logger LOGGER = Logger.getLogger(AI.class.getName());
     /**
      * This is the Game object itself, it contains all the information about the current game
      */
@@ -30,6 +39,10 @@ public class AI extends BaseAI {
      */
     public Player player;
 
+    private boolean hasStarted = false;
+
+    private GameData gameData = null;
+    private StateMachine<GameData> gameStrategy = null;
     // <<-- Creer-Merge: fields -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
     // you can add additional fields here for your AI to use
     // <<-- /Creer-Merge: fields -->>
@@ -84,17 +97,36 @@ public class AI extends BaseAI {
      * @return Represents if you want to end your turn. True means end your turn, False means to keep your turn going and re-call this function.
      */
     public boolean runTurn() {
+
+        if(!this.hasStarted) {
+            this.gameData     = new GameData();
+            this.gameStrategy = new StateMachine<>(new InitialGameStrategy());
+            this.hasStarted   = true;
+
+            this.LOGGER.setLevel(Level.ALL);
+            this.LOGGER.addHandler(new ConsoleHandler());
+        }
+
+        this.LOGGER.log(Level.FINE, "In run turn");
         // <<-- Creer-Merge: runTurn -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
         // Put your game logic here for runTurn
 
+
+
+        this.LOGGER.info("Updating game data");
         // 1. sync the game data with the list of units
         for(Unit unit : this.player.units) {
 
         }
 
 
-        // Update the state machine for the game strategy
+        this.LOGGER.info("Executing update on game strategy");
+        // Run the current strategy.
+        // The strategy states will change the strategy as needed, so we
+        // don't need to do much here.
+        gameStrategy.update(gameData);
 
+        this.LOGGER.info("Ending our turn");
         return true;
         // <<-- /Creer-Merge: runTurn -->>
     }
