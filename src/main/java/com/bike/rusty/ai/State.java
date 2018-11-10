@@ -1,4 +1,4 @@
-package com.bike.rusty;
+package com.bike.rusty.ai;
 
 public interface State<T> {
 

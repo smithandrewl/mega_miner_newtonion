@@ -1,4 +1,6 @@
-package com.bike.rusty;
+package com.bike.rusty.ai;
+
+import com.bike.rusty.ai.State;
 
 import java.util.ArrayList;
 import java.util.List;
