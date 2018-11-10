@@ -2,13 +2,19 @@ package com.bike.rusty.newtonian.units;
 
 import com.bike.rusty.ai.StateMachine;
 import com.bike.rusty.newtonian.GameData;
+import games.newtonian.AI;
 import games.newtonian.Unit;
 
+import java.util.logging.Logger;
+
 public class Physicist {
+    private static Logger LOGGER = Logger.getLogger(AI.class.getName());
 
     public Physicist(StateMachine<GameData> strategy, Unit unit) {
         this.strategy = strategy;
         this.unit = unit;
+
+        LOGGER.setLevel(AI.LOG_LEVEL);
     }
 
     private Unit unit;
@@ -18,6 +24,7 @@ public class Physicist {
     }
 
     public void update(GameData gameData) {
+        LOGGER.info(String.format("Updating Physicist ", unit.id));
         this.strategy.update(gameData);
     }
 
