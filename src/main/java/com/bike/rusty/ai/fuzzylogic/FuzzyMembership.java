@@ -3,43 +3,61 @@ package com.bike.rusty.ai.fuzzylogic;
 public class FuzzyMembership {
     private FuzzyMembership() {}
 
-    public float triangle(float x, float a, float b, float m) {
-        if(x <= a) return 0f;
+    public float triangle(float value, float lowerLimit, float upperLimit, float middle) {
+        if(value <= lowerLimit) return 0f;
 
-        if((a < x) && (x <= m)) {
-            return (x-a)/(m-a);
+        if((lowerLimit < value) && (value <= middle)) {
+            return (value-lowerLimit)/(middle-lowerLimit);
         }
 
-        if((m<x) && (x<b)) {
-            return (b - x) / (b - m);
+        if((middle<value) && (value<upperLimit)) {
+            return (upperLimit - value) / (upperLimit - middle);
         }
 
-        if(x >= b) {
+        if(value >= upperLimit) {
             return 0f;
         }
 
         return 0f;
     }
 
-    public float left(float x, float d, float c) {
-        if(x > d) return 0.0f;
+    public float left(float value, float upperLimit, float upperSupportLimit) {
+        if(value > upperLimit) return 0.0f;
 
-        if((c <= x) && (x <=d)) {
-            return (d - x) / (d - c);
+        if((upperSupportLimit <= value) && (value <=upperLimit)) {
+            return (upperLimit - value) / (upperLimit - upperSupportLimit);
         }
 
-        if(x < c) {
+        if(value < upperSupportLimit) {
             return 1.0f;
         }
 
         return 0.0f;
     }
 
-    public float right(float x, float a, float b) {
-        if(x < a) return 0.0f;
-        if((a<=x)&& (x<= b)) return (x-a)/(b-a);
-        if(x>b) return 1.0f;
+    public float right(float value, float lowerLimit, float lowerSupportLimit) {
+        if(value < lowerLimit) return 0.0f;
+        if((lowerLimit<=value)&& (value<= lowerSupportLimit)) return (value-lowerLimit)/(lowerSupportLimit-lowerLimit);
+        if(value>lowerSupportLimit) return 1.0f;
 
         return 0.0f;
+    }
+
+    public FuzzyVariable grade(float value, float low, float high) {
+
+
+        float middle = (high - low) / 2.0f;
+
+        FuzzyValue medValue  = new FuzzyValue(triangle(value, middle / 2.0f, middle + (middle / 2.0f), middle));
+        FuzzyValue lowValue  = new FuzzyValue(left(value, middle, middle / 2.0f));
+        FuzzyValue highValue = new FuzzyValue(right(value, middle, middle + (middle / 2.0f)));
+
+        FuzzyVariable result = new FuzzyVariable();
+
+        result.setLow(lowValue);
+        result.setMed(medValue);
+        result.setHigh(highValue);
+
+        return result;
     }
 }
