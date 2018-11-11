@@ -19,6 +19,20 @@ public class GameData {
 
     private HashSet<String> idsOfLoadedUnits;
 
+    public List<Machine> getRedMachines() {
+        List<Machine> redMachines = new ArrayList<>();
+
+        for(Machine machine : getMachines()) {
+            LOGGER.severe(machine.oreType);
+            if(machine.oreType.equals("redium")) {
+                redMachines.add(machine);
+            }
+        }
+
+        return redMachines;
+    }
+
+
     public List<Machine> getMachines() {
         return game.machines;
     }

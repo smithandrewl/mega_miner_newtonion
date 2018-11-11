@@ -34,7 +34,7 @@ public class HeadingToMachine implements State<GameData> {
         while(unit.moves > 0) {
             if(targetPath.isEmpty()) {
                 // Reached the machine
-                unit.drop(unit.tile, 1,"redium ore");
+                unit.drop(target, 1,"redium ore");
                 if(unit.rediumOre == 0) {
                     break;
                 }

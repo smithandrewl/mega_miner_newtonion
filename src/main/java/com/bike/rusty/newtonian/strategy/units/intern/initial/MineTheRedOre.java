@@ -33,12 +33,15 @@ public class MineTheRedOre implements State<GameData> {
             unit.pickup(unit.tile, 1, "redium ore");
         } else {
 
-            List<Machine> machines = data.getMachines();
+            List<Machine> machines = data.getRedMachines();
             int randomIdx= (int) ((Math.random() * 10) % machines.size());
 
-            Machine target = machines.get(randomIdx);
+            if(machines.size() > 0) {
+                Machine target = machines.get(randomIdx);
 
-            return new HeadingToMachine(intern, target.tile);
+
+                return new HeadingToMachine(intern, target.tile);
+            }
         }
 
 
