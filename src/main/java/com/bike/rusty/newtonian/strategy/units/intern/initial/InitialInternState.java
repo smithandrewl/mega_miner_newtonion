@@ -39,21 +39,42 @@ public class InitialInternState implements State<GameData> {
         List<Tile> tilesWithRedOre  = data.getRedOre();
         List<Tile> tilesWithBlueOre = data.getBlueOre();
 
-        if(tilesWithRedOre.size() > 0) {
-            LOGGER.info(String.format("Tiles exist with red ore."));
-            int randomDest = (int) ((Math.random() * 20) % tilesWithRedOre.size());
-            Tile target = tilesWithRedOre.get(randomDest);
-            LOGGER.info(String.format("Selected target tile (%s, %s) which has red ore.", target.x, target.y));
+        int startWithRed = (int) (Math.random() * 10 % 2);
+        if(startWithRed == 1d) {
+            if (tilesWithRedOre.size() > 0) {
+                LOGGER.info(String.format("Tiles exist with red ore."));
+                int randomDest = (int) ((Math.random() * 20) % tilesWithRedOre.size());
+                Tile target = tilesWithRedOre.get(randomDest);
+                LOGGER.info(String.format("Selected target tile (%s, %s) which has red ore.", target.x, target.y));
 
-            return new HeadingToRedOre(intern, target);
+                return new HeadingToRedOre(intern, target);
 
-        } else if(tilesWithBlueOre.size() > 0) {
-            LOGGER.info("Tiles exist with blue ore.");
-            int randomDest = (int) ((Math.random() * 20) % tilesWithBlueOre.size());
+            } else if (tilesWithBlueOre.size() > 0) {
+                LOGGER.info("Tiles exist with blue ore.");
+                int randomDest = (int) ((Math.random() * 20) % tilesWithBlueOre.size());
 
-            Tile target = tilesWithBlueOre.get(randomDest);
+                Tile target = tilesWithBlueOre.get(randomDest);
 
-            LOGGER.info(String.format("Selected target tile (%s, %s) which has blue ore.", target.x, target.y));
+                LOGGER.info(String.format("Selected target tile (%s, %s) which has blue ore.", target.x, target.y));
+                return new HeadingToRedOre(intern, target);
+            }
+        } else {
+            if (tilesWithBlueOre.size() > 0) {
+                LOGGER.info("Tiles exist with blue ore.");
+                int randomDest = (int) ((Math.random() * 20) % tilesWithBlueOre.size());
+
+                Tile target = tilesWithBlueOre.get(randomDest);
+
+                LOGGER.info(String.format("Selected target tile (%s, %s) which has blue ore.", target.x, target.y));
+                return new HeadingToRedOre(intern, target);
+            } else if (tilesWithRedOre.size() > 0) {
+                LOGGER.info(String.format("Tiles exist with red ore."));
+                int randomDest = (int) ((Math.random() * 20) % tilesWithRedOre.size());
+                Tile target = tilesWithRedOre.get(randomDest);
+                LOGGER.info(String.format("Selected target tile (%s, %s) which has red ore.", target.x, target.y));
+
+                return new HeadingToRedOre(intern, target);
+            }
         }
 
         return null;
