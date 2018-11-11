@@ -1,6 +1,7 @@
 package com.bike.rusty.ai;
 
 import com.bike.rusty.ai.State;
+import com.bike.rusty.newtonian.GameData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,14 @@ public class StateMachine<T> {
     private State<T>    currentState = null;
     private boolean started = false;
 
+    public StateMachine() {
+        this(null);
+    }
+
+    public void setInitialState(State<T> initialState) {
+        this.initialState = initialState;
+        this.currentState = currentState;
+    }
     public StateMachine(State<T> initialState) {
         this.initialState = initialState;
         this.currentState = initialState;

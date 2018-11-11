@@ -11,7 +11,7 @@ public class Intern {
 
     private static Logger LOGGER = Logger.getLogger(AI.class.getName());
 
-    public Intern(StateMachine<GameData> strategy, Unit unit) {
+    public Intern(Unit unit) {
         this.strategy = strategy;
         this.unit = unit;
         LOGGER.setLevel(AI.LOG_LEVEL);

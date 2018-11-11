@@ -9,17 +9,20 @@ import games.newtonian.AI;
 import java.util.logging.Logger;
 
 public class InitialInternState implements State<GameData> {
-    private final StateMachine<GameData> stateMachine;
+    private StateMachine<GameData> stateMachine;
     private final Intern                 intern;
 
 
     private static Logger LOGGER = Logger.getLogger(AI.class.getName());
 
-    public InitialInternState(StateMachine<GameData> stateMachine, Intern intern) {
-        this.stateMachine = stateMachine;
+    public InitialInternState(Intern intern) {
         this.intern       = intern;
 
         LOGGER.setLevel(AI.LOG_LEVEL);
+    }
+
+    public void setStateMachine(StateMachine<GameData> stateMachine) {
+        this.stateMachine = stateMachine;
     }
     @Override
     public String getName() {
