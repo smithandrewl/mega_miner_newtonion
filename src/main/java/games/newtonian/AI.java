@@ -99,13 +99,14 @@ public class AI extends BaseAI {
     public boolean runTurn() {
 
         if(!this.hasStarted) {
-            this.gameData     = new GameData();
+            this.gameData     = new GameData(this.game, this.player);
             this.gameStrategy = new StateMachine<>(new InitialGameStrategy());
             this.hasStarted   = true;
 
             this.LOGGER.setLevel(LOG_LEVEL);
         }
 
+        synchronizeData();
         this.LOGGER.log(Level.FINE, "In run turn");
         // <<-- Creer-Merge: runTurn -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
         // Put your game logic here for runTurn
@@ -129,6 +130,29 @@ public class AI extends BaseAI {
         return true;
         // <<-- /Creer-Merge: runTurn -->>
     }
+
+    private void synchronizeData() {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**
