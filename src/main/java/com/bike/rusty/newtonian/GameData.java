@@ -6,15 +6,9 @@ import com.bike.rusty.newtonian.strategy.units.intern.initial.InitialInternState
 import com.bike.rusty.newtonian.units.Intern;
 import com.bike.rusty.newtonian.units.Manager;
 import com.bike.rusty.newtonian.units.Physicist;
-import games.newtonian.AI;
-import games.newtonian.Game;
-import games.newtonian.Player;
-import games.newtonian.Unit;
+import games.newtonian.*;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class GameData {
@@ -24,6 +18,46 @@ public class GameData {
     private final List<Unit> units;
 
     private HashSet<String> idsOfLoadedUnits;
+
+    public List<Machine> getMachines() {
+        return game.machines;
+    }
+
+    public List<Machine> getReadyBlueMachines() {
+        List<Machine> readyBlueMachines = new ArrayList<>();
+
+        for(Machine machine : game.machines) {
+            if(machine.tile.blueiumOre >= machine.refineInput) {
+                readyBlueMachines.add(machine);
+            }
+        }
+
+
+        return readyBlueMachines;
+    }
+
+    public List<Tile> getBlueOre() {
+        List<Tile> tilesWithBlueOre = new ArrayList<>();
+
+        for(Tile tile : game.tiles) {
+            if(tile.blueiumOre > 0) {
+                tilesWithBlueOre.add(tile);
+            }
+        }
+
+        return tilesWithBlueOre;
+    }
+
+    public List<Tile> getRedOre() {
+        List<Tile> tilesWithRedOre = new ArrayList<>();
+        for(Tile tile : game.tiles) {
+            if(tile.rediumOre > 0) {
+                tilesWithRedOre.add(tile);
+            }
+        }
+
+        return tilesWithRedOre;
+    }
 
     public HashMap<String, Intern> getInterns() {
         return interns;
