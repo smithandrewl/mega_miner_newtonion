@@ -5,7 +5,10 @@ import com.bike.rusty.ai.StateMachine;
 import com.bike.rusty.newtonian.GameData;
 import com.bike.rusty.newtonian.units.Intern;
 import games.newtonian.AI;
+import games.newtonian.Tile;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class InitialInternState implements State<GameData> {
@@ -32,6 +35,27 @@ public class InitialInternState implements State<GameData> {
     @Override
     public State<GameData> update(GameData data) {
         LOGGER.info(String.format("Updating Initial Intern State for intern %s", intern.getId()));
+
+        List<Tile> tilesWithRedOre  = data.getRedOre();
+        List<Tile> tilesWithBlueOre = data.getBlueOre();
+
+        if(tilesWithRedOre.size() > 0) {
+            LOGGER.info(String.format("Tiles exist with red ore."));
+            int randomDest = (int) ((Math.random() * 20) % tilesWithRedOre.size());
+            Tile target = tilesWithRedOre.get(randomDest);
+            LOGGER.info(String.format("Selected target tile (%s, %s) which has red ore.", target.x, target.y));
+
+
+
+        } else if(tilesWithBlueOre.size() > 0) {
+            LOGGER.info("Tiles exist with blue ore.");
+            int randomDest = (int) ((Math.random() * 20) % tilesWithBlueOre.size());
+
+            Tile target = tilesWithBlueOre.get(randomDest);
+
+            LOGGER.info(String.format("Selected target tile (%s, %s) which has blue ore.", target.x, target.y));
+        }
+
         return null;
     }
 
