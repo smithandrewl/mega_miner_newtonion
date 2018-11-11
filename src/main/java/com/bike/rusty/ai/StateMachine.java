@@ -1,29 +1,16 @@
 package com.bike.rusty.ai;
 
-import com.bike.rusty.ai.State;
-import com.bike.rusty.newtonian.GameData;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class StateMachine<T> {
-    private List<State> states       = new ArrayList<State>();
-    private State<T>    initialState = null;
-    private State<T>    currentState = null;
-    private boolean started = false;
+    private State<T> initialState = null;
+    private State<T> currentState = null;
+    private boolean  started = false;
 
     public StateMachine() {
-        this(null);
     }
 
     public void setInitialState(State<T> initialState) {
         this.initialState = initialState;
         this.currentState = initialState;
-    }
-    public StateMachine(State<T> initialState) {
-        this.initialState = initialState;
-        this.currentState = initialState;
-
     }
 
     public void switchState(State<T> state, T data) {
