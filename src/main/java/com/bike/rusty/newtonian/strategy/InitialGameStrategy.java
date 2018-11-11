@@ -1,13 +1,14 @@
 package com.bike.rusty.newtonian.strategy;
 
 import com.bike.rusty.ai.State;
+import com.bike.rusty.ai.StateMachine;
 import com.bike.rusty.newtonian.GameData;
 import games.newtonian.AI;
 
 import java.util.logging.Logger;
 
 public class InitialGameStrategy implements State<GameData> {
-    private static Logger LOGGER = Logger.getLogger(AI.class.getName());
+    private static Logger LOGGER = Logger.getLogger(InitialGameStrategy.class.getName());
 
     public InitialGameStrategy() {
         LOGGER.setLevel(AI.LOG_LEVEL);
@@ -33,4 +34,10 @@ public class InitialGameStrategy implements State<GameData> {
     public void exiting(GameData data) {
         LOGGER.info( "Game strategy is changing.  Initial game strategy is exiting.");
     }
+
+    @Override
+    public void setStateMachine(StateMachine<GameData> stateMachine) {
+        this.setStateMachine(stateMachine);
+    }
+
 }

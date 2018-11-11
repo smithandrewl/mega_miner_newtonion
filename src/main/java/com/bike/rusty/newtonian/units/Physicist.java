@@ -8,7 +8,7 @@ import games.newtonian.Unit;
 import java.util.logging.Logger;
 
 public class Physicist {
-    private static Logger LOGGER = Logger.getLogger(AI.class.getName());
+    private static Logger LOGGER = Logger.getLogger(Physicist.class.getName());
 
     public Physicist(StateMachine<GameData> strategy, Unit unit) {
         this.strategy = strategy;

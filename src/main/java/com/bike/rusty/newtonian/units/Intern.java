@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class Intern {
 
-    private static Logger LOGGER = Logger.getLogger(AI.class.getName());
+    private static Logger LOGGER = Logger.getLogger(Intern.class.getName());
 
     public Intern(Unit unit) {
         this.strategy = strategy;

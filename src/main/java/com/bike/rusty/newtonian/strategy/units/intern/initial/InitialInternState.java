@@ -13,7 +13,7 @@ public class InitialInternState implements State<GameData> {
     private final Intern                 intern;
 
 
-    private static Logger LOGGER = Logger.getLogger(AI.class.getName());
+    private static Logger LOGGER = Logger.getLogger(InitialInternState.class.getName());
 
     public InitialInternState(Intern intern) {
         this.intern       = intern;
