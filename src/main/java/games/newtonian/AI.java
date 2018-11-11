@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.bike.rusty.ai.State;
 import com.bike.rusty.ai.StateMachine;
 import com.bike.rusty.newtonian.GameData;
 import com.bike.rusty.newtonian.strategy.InitialGameStrategy;
@@ -100,13 +101,16 @@ public class AI extends BaseAI {
 
         if(!this.hasStarted) {
             this.gameData     = new GameData(this.game, this.player);
-            this.gameStrategy = new StateMachine<>(new InitialGameStrategy());
+            State<GameData> initialGameState = new InitialGameStrategy();
+            this.gameStrategy = new StateMachine<>();
+            initialGameState.setStateMachine(this.gameStrategy);
+            this.gameStrategy.setInitialState(initialGameState);
+
             this.hasStarted   = true;
 
             this.LOGGER.setLevel(LOG_LEVEL);
         }
 
-        synchronizeData();
         this.LOGGER.log(Level.FINE, "In run turn");
         // <<-- Creer-Merge: runTurn -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
         // Put your game logic here for runTurn
@@ -114,10 +118,7 @@ public class AI extends BaseAI {
 
 
         this.LOGGER.info("Updating game data");
-        // 1. sync the game data with the list of units
-        for(Unit unit : this.player.units) {
-
-        }
+        gameData.update();
 
 
         this.LOGGER.info("Executing update on game strategy");
@@ -131,9 +132,6 @@ public class AI extends BaseAI {
         // <<-- /Creer-Merge: runTurn -->>
     }
 
-    private void synchronizeData() {
-
-    }
 
 
 

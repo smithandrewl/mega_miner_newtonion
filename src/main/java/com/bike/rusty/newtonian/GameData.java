@@ -24,6 +24,19 @@ public class GameData {
     private final List<Unit> units;
 
     private HashSet<String> idsOfLoadedUnits;
+
+    public HashMap<String, Intern> getInterns() {
+        return interns;
+    }
+
+    public HashMap<String, Physicist> getPhysicists() {
+        return physicists;
+    }
+
+    public HashMap<String, Manager> getManagers() {
+        return managers;
+    }
+
     private HashMap<String, Intern>    interns;
     private HashMap<String, Physicist> physicists;
     private HashMap<String, Manager>   managers;
@@ -38,6 +51,10 @@ public class GameData {
         this.idsOfLoadedUnits = new HashSet<>();
 
         LOGGER.setLevel(AI.LOG_LEVEL);
+
+        interns = new HashMap<>();
+        physicists = new HashMap<>();
+        managers = new HashMap<>();
     }
 
     public void update() {
