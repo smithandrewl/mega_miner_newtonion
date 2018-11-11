@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 public class InitialGameStrategy implements State<GameData> {
     private static Logger LOGGER = Logger.getLogger(InitialGameStrategy.class.getName());
+    private StateMachine<GameData> stateMachine;
 
     public InitialGameStrategy() {
         LOGGER.setLevel(AI.LOG_LEVEL);
@@ -37,7 +38,7 @@ public class InitialGameStrategy implements State<GameData> {
 
     @Override
     public void setStateMachine(StateMachine<GameData> stateMachine) {
-        this.setStateMachine(stateMachine);
+        this.stateMachine = stateMachine;
     }
 
 }
