@@ -18,7 +18,7 @@ public class StateMachine<T> {
 
     public void setInitialState(State<T> initialState) {
         this.initialState = initialState;
-        this.currentState = currentState;
+        this.currentState = initialState;
     }
     public StateMachine(State<T> initialState) {
         this.initialState = initialState;
