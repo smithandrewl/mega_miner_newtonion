@@ -45,7 +45,7 @@ public class InitialInternState implements State<GameData> {
             Tile target = tilesWithRedOre.get(randomDest);
             LOGGER.info(String.format("Selected target tile (%s, %s) which has red ore.", target.x, target.y));
 
-
+            return new HeadingToRedOre(intern, target);
 
         } else if(tilesWithBlueOre.size() > 0) {
             LOGGER.info("Tiles exist with blue ore.");

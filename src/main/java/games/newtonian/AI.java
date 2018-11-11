@@ -157,9 +157,9 @@ public class AI extends BaseAI {
      * A very basic path finding algorithm (Breadth First Search) that when given a starting Tile, will return a valid path to the goal Tile.
      * @param  start  the starting Tile
      * @param  goal  the goal Tile
-     * @return A List of Tiles representing the path, the the first element being a valid adjacent Tile to the start, and the last element being the goal. Or an empty list if no path found.
+     * @return A List of Tiles representing the path, the the first element being a valid adjacent Tile to the start, and the last element being the goal. Or an isEmpty list if no path found.
      */
-    List<Tile> findPath(Tile start, Tile goal) {
+    public static List<Tile> findPath(Tile start, Tile goal) {
         // no need to make a path to here...
         if (start == goal) {
             return new ArrayList<Tile>();
@@ -207,10 +207,10 @@ public class AI extends BaseAI {
 
             } // for each neighbor
 
-        } // while fringe not empty
+        } // while fringe not isEmpty
 
         // if you're here, that means that there was not a path to get to where you want to go.
-        //   in that case, we'll just return an empty path.
+        //   in that case, we'll just return an isEmpty path.
         return new ArrayList<Tile>();
     }
 
