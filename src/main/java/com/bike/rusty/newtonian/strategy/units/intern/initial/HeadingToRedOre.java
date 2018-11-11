@@ -41,7 +41,7 @@ public class HeadingToRedOre implements State<GameData> {
         while(intern.getUnit().moves > 0) {
         if(pathToTile.isEmpty()) {
             LOGGER.info("We have arrived at the tile which had red ore.");
-            break;
+            return new MineTheRedOre(intern);
             // we are at the location.
         } else {
 
@@ -65,7 +65,7 @@ public class HeadingToRedOre implements State<GameData> {
 
     @Override
     public void exiting(GameData data) {
-        LOGGER.info(String.format("Intern %s Exiting Heading To Red Ore State"));
+        LOGGER.info(String.format("Intern %s Exiting Heading To Red Ore State", intern.getId()));
     }
 
     @Override
