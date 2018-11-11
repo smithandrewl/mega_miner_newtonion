@@ -155,7 +155,11 @@ public class Tile extends GameObject {
      */
     public boolean isPathable() {
         // <<-- Creer-Merge: is_pathable_builtin -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
-        return false; // DEVELOPER ADD LOGIC HERE
+        // <<-- Creer-Merge: is_pathable_builtin -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
+        if (isWall) return false;
+        if (machine != null) return  false;
+        if (unit != null) return false;
+        return true; // DEVELOPER ADD LOGIC HERE
         // <<-- /Creer-Merge: is_pathable_builtin -->>
     }
 

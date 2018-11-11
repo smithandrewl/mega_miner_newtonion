@@ -20,8 +20,12 @@ public class HeadingToRedOre implements State<GameData> {
     public HeadingToRedOre(Intern intern, Tile target) {
         this.intern = intern;
         this.targetTile = target;
-        this.pathToTile = AI.findPath(this.intern.getUnit().tile, this.targetTile);
+        Tile internTile = this.intern.getUnit().tile;
+        this.pathToTile = AI.findPath(internTile, this.targetTile);
 
+        if(pathToTile.isEmpty()) {
+            LOGGER.severe(String.format("Could not find a path for intern from (%s, %s) to (%s, %s)", internTile.x, internTile.y, targetTile.x, targetTile.y ));
+        }
         for(Tile tile : pathToTile) {
             System.out.print(String.format("(%s, %s) -> ", tile.x, tile.y));
         }
@@ -34,16 +38,20 @@ public class HeadingToRedOre implements State<GameData> {
 
     @Override
     public State<GameData> update(GameData data) {
+        while(intern.getUnit().moves > 0) {
         if(pathToTile.isEmpty()) {
             LOGGER.info("We have arrived at the tile which had red ore.");
+            break;
             // we are at the location.
         } else {
-            Tile nextTile = pathToTile.get(0);
 
-            LOGGER.info("We are still not at the red ore tile.");
-            LOGGER.info(String.format("Moving to (%s, %s)", nextTile.x, nextTile.y));
-            this.intern.getUnit().move(nextTile);
-            pathToTile.remove(0);
+                Tile nextTile = pathToTile.get(0);
+
+                LOGGER.info("We are still not at the red ore tile.");
+                LOGGER.info(String.format("Moving to (%s, %s)", nextTile.x, nextTile.y));
+                this.intern.getUnit().move(nextTile);
+                pathToTile.remove(0);
+            }
         }
 
         return null;
